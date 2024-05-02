@@ -46,6 +46,10 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            newItem.streak = 0
+            newItem.done = false
+            //TODO: här ska man få ange namn
+            newItem.name = "new habit"
 
             do {
                 try viewContext.save()
@@ -76,8 +80,9 @@ struct ContentView: View {
 
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+    formatter.dateFormat = "yyyy-MM-dd"
+    //formatter.dateStyle = .short
+    //formatter.timeStyle = .none
     return formatter
 }()
 

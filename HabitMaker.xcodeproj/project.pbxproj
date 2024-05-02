@@ -16,6 +16,7 @@
 		E373ACBC2BE0EB8600EB417D /* HabitMakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACBB2BE0EB8600EB417D /* HabitMakerTests.swift */; };
 		E373ACC62BE0EB8600EB417D /* HabitMakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACC52BE0EB8600EB417D /* HabitMakerUITests.swift */; };
 		E373ACC82BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACC72BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift */; };
+		E373ACD52BE37A8100EB417D /* Uppgift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD42BE37A8100EB417D /* Uppgift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		E373ACC12BE0EB8600EB417D /* HabitMakerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitMakerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E373ACC52BE0EB8600EB417D /* HabitMakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMakerUITests.swift; sourceTree = "<group>"; };
 		E373ACC72BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMakerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E373ACD42BE37A8100EB417D /* Uppgift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uppgift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				E373ACAE2BE0EB8600EB417D /* Persistence.swift */,
 				E373ACB02BE0EB8600EB417D /* HabitMaker.xcdatamodeld */,
 				E373ACAB2BE0EB8600EB417D /* Preview Content */,
+				E373ACD42BE37A8100EB417D /* Uppgift.swift */,
 			);
 			path = HabitMaker;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E373ACD52BE37A8100EB417D /* Uppgift.swift in Sources */,
 				E373ACAF2BE0EB8600EB417D /* Persistence.swift in Sources */,
 				E373ACA82BE0EB8300EB417D /* ContentView.swift in Sources */,
 				E373ACA62BE0EB8300EB417D /* HabitMakerApp.swift in Sources */,
