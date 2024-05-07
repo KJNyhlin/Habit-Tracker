@@ -27,7 +27,13 @@ Du väljer själv om din app skall vara skapad i swiftui eller med storyboard. D
  Varje cell visar namnet på vanan och streak (OBS alltså inte datumet då det skapades) samt en knapp för "done". Man kan också klicka på texten för att komma till en sida som visar komplett info om den vanan (Infosida).
  
  SÅ HÄR KAN "DONE" FUNKA:
- När man klickar "done" sparas en doneTimeStamp. Om man avmarkerar "done" sätts doneTimeStamp tillbaka till 0(?).
+ När man klickar "done" sparas en latestDoneTimeStamp som dagens datum, men först kopieras värdet i latestDoneTimeStamp till previousDoneTimeStamp. Om latestDoneTimeStamp är en dag "högre" än previousDoneTimeStamp så blir streak +1. Om man avmarkerar "done" flyttas previous-datumet tillbaka till latestDoneTimeStamp och streak blir -1.
+ När sidan öppnas: om tidpunkten midnatt har passerat sedan "done"-rutan senast kryssades i (latestDoneTimeStamp), så avmerkeras den.
+ Eventuellt spara en lista med alla datum då "done" har markerats. Detta gör det lättare att beräkna verkliga streaks och hantera avbrott.
+ Beräkna streaks dynamiskt: Varje gång användaren öppnar sidan eller markerar en vana som "done", gå igenom listan av sparade datum och beräkna streaks baserat på kontinuerliga datum.
+TODO men inte en prioritet: fixa vad som händer när man avmarkerar "done"
+ 
+ Hantera avmarkeringar smartare: När en användare avmarkerar "done", radera det datumet från listan och räkna om streaks.
  
  På startsidan finns också en knapp för "add habit" och en knapp för "my statistics".
  

@@ -18,29 +18,24 @@ struct HabitListView: View {
     var body: some View {
         List {
             ForEach(items) { item in
-                //NavigationLink {
-                //    Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                 HStack{
                     if let name = item.name {
                         Text(name)
                     }
                     Spacer()
-                    //if item.streak > 0 { // uncomment before release
+                    //if item.streak > 0 { // consider uncommenting before release
                     Text("Streak: " + String(item.streak))
                     Spacer()
-                    //} // uncomment before release
-                    
-                    Button(action: {}) {
+                    //} // consider uncommenting before release, see above
+                    Button(action: {
+                        markDone(item)
+                    }) {
                         Image(systemName: item.done ? "checkmark.circle.fill" : "circle")
                             .foregroundColor(item.done ? .green : .gray)
-                            .onTapGesture {
-                                item.done.toggle()
-                            }
+                            //.onTapGesture {
+                             //   item.done.toggle()
+                            //}
                     }
-                    
-                    
-                    //label: {
-                    //Text(item.timestamp!, formatter: itemFormatter)
                 }
             }
             .onDelete(perform: deleteItems)
@@ -56,17 +51,38 @@ struct HabitListView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
     
+    private func markDone(_ item: Item) {
+            withAnimation {
+                item.done.toggle()  // Toggle the 'done' state
+                if item.done {
+                    item.latestDoneDate = Date()  // Update the latestDoneDate to today
+                } else {
+                    item.latestDoneDate = nil
+                }
+                saveContext()
+                //print(item)
+            }
+        }
+
+        private func saveContext() {
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    
     struct HabitListView_Previews: PreviewProvider {
         static var previews: some View {
             HabitListView()
         }
     }
+    
 }
