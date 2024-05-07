@@ -31,7 +31,6 @@ Du väljer själv om din app skall vara skapad i swiftui eller med storyboard. D
  När sidan öppnas: om tidpunkten midnatt har passerat sedan "done"-rutan senast kryssades i (latestDoneTimeStamp), så avmerkeras den.
  Eventuellt spara en lista med alla datum då "done" har markerats. Detta gör det lättare att beräkna verkliga streaks och hantera avbrott.
  Beräkna streaks dynamiskt: Varje gång användaren öppnar sidan eller markerar en vana som "done", gå igenom listan av sparade datum och beräkna streaks baserat på kontinuerliga datum.
-TODO men inte en prioritet: fixa vad som händer när man avmarkerar "done"
  
  Hantera avmarkeringar smartare: När en användare avmarkerar "done", radera det datumet från listan och räkna om streaks.
  

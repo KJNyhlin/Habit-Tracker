@@ -9,40 +9,56 @@ import SwiftUI
 
 struct HabitListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        //predicate: NSPredicate(format: "done == %d", false), // om man vill visa ett urval
         animation: .default)
     private var items: FetchedResults<Item>
+
     var body: some View {
         List {
             ForEach(items) { item in
-                HStack{
-                    if let name = item.name {
-                        Text(name)
-                    }
+                HStack {
+                    Text(item.name ?? "Unnamed Habit")
                     Spacer()
-                    //if item.streak > 0 { // consider uncommenting before release
-                    Text("Streak: " + String(item.streak))
+                    Text("Streak: \(item.streak)")
                     Spacer()
-                    //} // consider uncommenting before release, see above
                     Button(action: {
                         markDone(item)
                     }) {
                         Image(systemName: item.done ? "checkmark.circle.fill" : "circle")
                             .foregroundColor(item.done ? .green : .gray)
-                            //.onTapGesture {
-                             //   item.done.toggle()
-                            //}
                     }
                 }
             }
             .onDelete(perform: deleteItems)
-            
         }
-        
+        .onAppear {
+            checkDatesAndUpdateStatus()
+        }
     }
+
+
+    private func checkDatesAndUpdateStatus() {
+        let today = Calendar.current.startOfDay(for: Date())
+        for item in items {
+            if let latestDoneDate = item.latestDoneDate, Calendar.current.startOfDay(for: latestDoneDate) != today {
+                item.done = false
+            }
+        }
+        saveContext()
+    }
+
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+
+
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
@@ -59,9 +75,13 @@ struct HabitListView: View {
     
     private func markDone(_ item: Item) {
             withAnimation {
-                item.done.toggle()  // Toggle the 'done' state
+                item.done.toggle()  // Toggles the 'done' state
                 if item.done {
-                    item.latestDoneDate = Date()  // Update the latestDoneDate to today
+                    item.penultimateDoneDate = item.latestDoneDate
+                    item.latestDoneDate = Date()  // Updates the latestDoneDate to today
+                    if isOneDayBefore(item.penultimateDoneDate, comparedTo: item.latestDoneDate) {
+                        item.streak += 1
+                    }
                 } else {
                     item.latestDoneDate = nil
                 }
@@ -70,14 +90,29 @@ struct HabitListView: View {
             }
         }
 
-        private func saveContext() {
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        
+    
+    func isOneDayBefore(_ penultimateDoneDate: Date?, comparedTo latestDoneDate: Date?) -> Bool {
+        guard let penultimateDoneDate = penultimateDoneDate,
+              let latestDoneDate = latestDoneDate else {
+            return false  // Om något av datumen är nil
         }
+
+        let calendar = Calendar.current
+        let components: Set<Calendar.Component> = [.year, .month, .day]
+
+        let penultimateComponents = calendar.dateComponents(components, from: penultimateDoneDate)
+        let latestComponents = calendar.dateComponents(components, from: latestDoneDate)
+        
+        if let penultimateDay = calendar.date(from: penultimateComponents),
+           let nextDay = calendar.date(byAdding: .day, value: 1, to: penultimateDay),
+           let latestDay = calendar.date(from: latestComponents) {
+            return nextDay == latestDay
+        }
+        
+        return false
+    }
+    
     
     struct HabitListView_Previews: PreviewProvider {
         static var previews: some View {
