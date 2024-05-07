@@ -18,6 +18,7 @@
 		E373ACC82BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACC72BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift */; };
 		E373ACD52BE37A8100EB417D /* Uppgift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD42BE37A8100EB417D /* Uppgift.swift */; };
 		E373ACD72BE517B100EB417D /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD62BE517B100EB417D /* HabitListView.swift */; };
+		E373ACD92BE90CD200EB417D /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD82BE90CD200EB417D /* AddHabitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		E373ACC72BE0EB8600EB417D /* HabitMakerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitMakerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E373ACD42BE37A8100EB417D /* Uppgift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uppgift.swift; sourceTree = "<group>"; };
 		E373ACD62BE517B100EB417D /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
+		E373ACD82BE90CD200EB417D /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +106,13 @@
 			children = (
 				E373ACA52BE0EB8300EB417D /* HabitMakerApp.swift */,
 				E373ACA72BE0EB8300EB417D /* ContentView.swift */,
+				E373ACD62BE517B100EB417D /* HabitListView.swift */,
+				E373ACD82BE90CD200EB417D /* AddHabitView.swift */,
 				E373ACA92BE0EB8600EB417D /* Assets.xcassets */,
 				E373ACAE2BE0EB8600EB417D /* Persistence.swift */,
 				E373ACB02BE0EB8600EB417D /* HabitMaker.xcdatamodeld */,
 				E373ACAB2BE0EB8600EB417D /* Preview Content */,
 				E373ACD42BE37A8100EB417D /* Uppgift.swift */,
-				E373ACD62BE517B100EB417D /* HabitListView.swift */,
 			);
 			path = HabitMaker;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			files = (
 				E373ACD52BE37A8100EB417D /* Uppgift.swift in Sources */,
 				E373ACAF2BE0EB8600EB417D /* Persistence.swift in Sources */,
+				E373ACD92BE90CD200EB417D /* AddHabitView.swift in Sources */,
 				E373ACA82BE0EB8300EB417D /* ContentView.swift in Sources */,
 				E373ACD72BE517B100EB417D /* HabitListView.swift in Sources */,
 				E373ACA62BE0EB8300EB417D /* HabitMakerApp.swift in Sources */,

@@ -25,6 +25,10 @@ Du väljer själv om din app skall vara skapad i swiftui eller med storyboard. D
  Startsida:
  Visar en scrollview med habits som man har lagt till.
  Varje cell visar namnet på vanan och streak (OBS alltså inte datumet då det skapades) samt en knapp för "done". Man kan också klicka på texten för att komma till en sida som visar komplett info om den vanan (Infosida).
+ 
+ SÅ HÄR KAN "DONE" FUNKA:
+ När man klickar "done" sparas en doneTimeStamp. Om man avmarkerar "done" sätts doneTimeStamp tillbaka till 0(?).
+ 
  På startsidan finns också en knapp för "add habit" och en knapp för "my statistics".
  
  Infosida:

@@ -31,7 +31,11 @@ struct HabitListView: View {
                     //} // uncomment before release
                     
                     Button(action: {}) {
-                        Image(systemName: item.done ? "checkmark.square" : "square")
+                        Image(systemName: item.done ? "checkmark.circle.fill" : "circle")
+                            .foregroundColor(item.done ? .green : .gray)
+                            .onTapGesture {
+                                item.done.toggle()
+                            }
                     }
                     
                     
