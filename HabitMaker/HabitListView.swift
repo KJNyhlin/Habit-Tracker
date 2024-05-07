@@ -13,30 +13,41 @@ struct HabitListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    @Binding var showingDetail: Bool
 
     var body: some View {
         List {
             ForEach(items) { item in
-                HStack {
-                    Text(item.name ?? "Unnamed Habit")
-                    Spacer()
-                    Text("Streak: \(item.streak)")
-                    Spacer()
-                    Button(action: {
-                        markDone(item)
-                    }) {
-                        Image(systemName: item.done ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(item.done ? .green : .gray)
-                    }
-                }
+                NavigationLink(destination: ItemDetailView(item: item)
+                    .onDisappear { showingDetail = false }
+                    .onAppear { showingDetail = true }) {
+                        HStack {
+                            Text(item.name ?? "Unnamed Habit")
+                            Spacer()
+                            Text("Streak: \(item.streak)")
+                            
+                                .buttonStyle(PlainButtonStyle()) // Förhindrar knappens standard beteende i listan
+                            
+                            Spacer()
+                            
+                            // Button för att markera habit som "done"
+                            Button(action: {
+                                markDone(item)
+                            }) {
+                                Image(systemName: item.done ? "checkmark.circle.fill" : "circle")
+                                    .foregroundColor(item.done ? .green : .gray)
+                            }
+                            .buttonStyle(PlainButtonStyle()) // Se till att knappen inte triggar navigation
+                        }}}
+        
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
+            //.navigationTitle("Habits")
+            .onAppear {
+                checkDatesAndUpdateStatus()
+            }
         }
-        .onAppear {
-            checkDatesAndUpdateStatus()
-        }
-    }
-
+    
 
     private func checkDatesAndUpdateStatus() {
         let today = Calendar.current.startOfDay(for: Date())
@@ -56,8 +67,6 @@ struct HabitListView: View {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
-
-
 
     
     private func deleteItems(offsets: IndexSet) {
@@ -116,7 +125,7 @@ struct HabitListView: View {
     
     struct HabitListView_Previews: PreviewProvider {
         static var previews: some View {
-            HabitListView()
+            EmptyView()
         }
     }
     

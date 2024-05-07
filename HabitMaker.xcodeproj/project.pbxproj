@@ -19,6 +19,7 @@
 		E373ACD52BE37A8100EB417D /* Uppgift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD42BE37A8100EB417D /* Uppgift.swift */; };
 		E373ACD72BE517B100EB417D /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD62BE517B100EB417D /* HabitListView.swift */; };
 		E373ACD92BE90CD200EB417D /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACD82BE90CD200EB417D /* AddHabitView.swift */; };
+		E373ACDB2BEAA4FA00EB417D /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373ACDA2BEAA4FA00EB417D /* HabitDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		E373ACD42BE37A8100EB417D /* Uppgift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uppgift.swift; sourceTree = "<group>"; };
 		E373ACD62BE517B100EB417D /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
 		E373ACD82BE90CD200EB417D /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
+		E373ACDA2BEAA4FA00EB417D /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				E373ACA72BE0EB8300EB417D /* ContentView.swift */,
 				E373ACD62BE517B100EB417D /* HabitListView.swift */,
 				E373ACD82BE90CD200EB417D /* AddHabitView.swift */,
+				E373ACDA2BEAA4FA00EB417D /* HabitDetailView.swift */,
 				E373ACA92BE0EB8600EB417D /* Assets.xcassets */,
 				E373ACAE2BE0EB8600EB417D /* Persistence.swift */,
 				E373ACB02BE0EB8600EB417D /* HabitMaker.xcdatamodeld */,
@@ -278,6 +281,7 @@
 				E373ACA82BE0EB8300EB417D /* ContentView.swift in Sources */,
 				E373ACD72BE517B100EB417D /* HabitListView.swift in Sources */,
 				E373ACA62BE0EB8300EB417D /* HabitMakerApp.swift in Sources */,
+				E373ACDB2BEAA4FA00EB417D /* HabitDetailView.swift in Sources */,
 				E373ACB22BE0EB8600EB417D /* HabitMaker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

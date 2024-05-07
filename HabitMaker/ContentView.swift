@@ -13,28 +13,30 @@ struct ContentView: View {
     
     @State private var showingSheet = false
     @State private var habitName = ""
+    @State private var showingDetail = false
     
     
 
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Text("Habit name")
-                    Spacer()
-                    Text("Streak")
-                    Spacer()
-                    Text("Done today")
+                if !showingDetail {
+                    HStack {
+                        Text("Habit name")
+                        Spacer()
+                        Text("Streak")
+                        Spacer()
+                        Text("Done today")
+                    }
+                    .padding()
                 }
-                .padding()
-                HabitListView()
-                
+                HabitListView(showingDetail: $showingDetail)
                 
                 //for testing, remove before release
                 Button("Add Test Items") {
-                                addTestItems()
-                            }
-                
+                    addTestItems()
+                }
+            }
                 
             }
             .toolbar {
@@ -55,7 +57,7 @@ struct ContentView: View {
                 }
             }
         }
-    }
+    
 
     private func addItem() {
         withAnimation {
