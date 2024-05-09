@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 public struct AddHabitView: View {
+
     @Binding var habitName: String
     @Binding var showingSheet: Bool
     var onSave: () -> Void // Callback-stängning för att anropa addItem()
@@ -23,11 +24,21 @@ public struct AddHabitView: View {
     public var body: some View {
         VStack {
             TextField("Name your new habit", text: $habitName)
-            Button("Save") {
-                onSave() // Anropa callback-stängningen för att spara habiten
-                showingSheet = false // Stänger sheeten
-            }
+                .onChange(of: habitName) { newValue in
+                    print("Habit name changed to: \(newValue)")
+                }
+                .onSubmit {
+                    onSave()
+                    habitName = ""  // Rensa habitName direkt efter att den har sparats
+                    showingSheet = false
+                }
+            //Button("Save") {
+            //    onSave() // Anropa callback-stängningen för att spara habiten
+            //    showingSheet = false // Stänger sheeten
+            //}
         }
         .padding()
     }
 }
+
+
