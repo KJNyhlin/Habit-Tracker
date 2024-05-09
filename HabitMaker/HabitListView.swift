@@ -10,12 +10,9 @@ import SwiftUI
 struct HabitListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        entity: Item.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default
-    )
+        animation: .default)
     private var items: FetchedResults<Item>
-
     @Binding var showingDetail: Bool
 
     var body: some View {
@@ -39,7 +36,6 @@ struct HabitListView: View {
                                     .foregroundColor(item.done ? .green : .gray)
                             }
                             .buttonStyle(PlainButtonStyle()) // Se till att knappen inte triggar navigation
-                            
                         }}}
         
                 .onDelete(perform: deleteItems)
@@ -51,24 +47,6 @@ struct HabitListView: View {
         }
     
 
-    private func markDone(_ item: Item) {
-        withAnimation {
-            print("Toggling done for item: \(item.name ?? "Unnamed")")
-            item.done.toggle()
-            if item.done {
-                item.penultimateDoneDate = item.latestDoneDate
-                item.latestDoneDate = Date()
-                if isOneDayBefore(item.penultimateDoneDate, comparedTo: item.latestDoneDate) {
-                    item.streak += 1
-                }
-            } else {
-                item.latestDoneDate = nil
-            }
-            saveContext()
-        }
-    }
-
-    
     private func checkDatesAndUpdateStatus() {
         let today = Calendar.current.startOfDay(for: Date())
         for item in items {
@@ -102,7 +80,22 @@ struct HabitListView: View {
         }
     }
     
-    
+    private func markDone(_ item: Item) {
+            withAnimation {
+                item.done.toggle()  // Toggles the 'done' state
+                if item.done {
+                    item.penultimateDoneDate = item.latestDoneDate
+                    item.latestDoneDate = Date()  // Updates the latestDoneDate to today
+                    if isOneDayBefore(item.penultimateDoneDate, comparedTo: item.latestDoneDate) {
+                        item.streak += 1
+                    }
+                } else {
+                    item.latestDoneDate = nil
+                }
+                saveContext()
+                //print(item)
+            }
+        }
 
         
     

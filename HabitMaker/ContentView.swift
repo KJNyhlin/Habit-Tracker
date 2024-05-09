@@ -4,6 +4,7 @@
 //
 //  Created by Karl Nyhlin on 2024-04-30.
 //
+//DET HÄR ÄR DEN NYA VERSIONEN
 
 import SwiftUI
 import CoreData
@@ -37,8 +38,8 @@ struct ContentView: View {
                     addTestItems()
                 }
             }
-            
-            //}
+                
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -57,7 +58,7 @@ struct ContentView: View {
                 }
             }
         }
-    }
+    
 
     private func addItem() {
         withAnimation {
@@ -67,9 +68,6 @@ struct ContentView: View {
             newItem.done = false
             newItem.name = habitName
             
-            print("Lägger nu till en vana med namnet \(habitName)")
-            habitName = "" // Rensa habitName efter att habiten är skapad
-
             do {
                 try viewContext.save()
             } catch {
@@ -78,14 +76,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-
     private func addTestItems() {
             // Definiera datumsträngarna
             let dateStrings = ["2024-05-06 12:00:00", "2024-05-05 12:00:00", "2024-05-03 12:00:00"]
