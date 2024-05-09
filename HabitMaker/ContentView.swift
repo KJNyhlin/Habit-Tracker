@@ -4,6 +4,7 @@
 //
 //  Created by Karl Nyhlin on 2024-04-30.
 //
+//DET HÄR ÄR DEN NYA VERSIONEN
 
 import SwiftUI
 import CoreData

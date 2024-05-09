@@ -25,9 +25,7 @@ struct HabitListView: View {
                             Text(item.name ?? "Unnamed Habit")
                             Spacer()
                             Text("Streak: \(item.streak)")
-                            
-                                .buttonStyle(PlainButtonStyle()) // Förhindrar knappens standard beteende i listan
-                            
+                                                        
                             Spacer()
                             
                             // Button för att markera habit som "done"
