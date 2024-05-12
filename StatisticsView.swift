@@ -18,8 +18,8 @@ struct StatisticsView: View {
 
     var body: some View {
         VStack {
-            if let startDate = longestStreakStartDate {
-                Text("Longest Streak: \(longestStreakName)")// (\(longestStreak) days)")//, Streak started on \(dateFormatter.string(from: startDate))")
+            if longestStreakStartDate != nil {
+                Text("Longest Streak: \(longestStreakName) (\(longestStreak) days)")//, Streak started on \(dateFormatter.string(from: startDate))")
             } else {
                 Text("No streaks available")
             }
@@ -46,7 +46,7 @@ struct StatisticsView: View {
                let name = details["name"] as? String {
                 let dateString = dateFormatter.string(from: date)
                 countsByDate[dateString, default: 0] += 1
-                
+                    
                 if streak > longestStreak {
                     longestStreak = streak
                     currentLongestStreakName = name
@@ -58,6 +58,7 @@ struct StatisticsView: View {
         habitCountsByDate = countsByDate
         longestStreakName = currentLongestStreakName
         longestStreakStartDate = currentLongestStreakStartDate
+        self.longestStreak = longestStreak
     }
 
 }
