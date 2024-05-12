@@ -14,29 +14,54 @@ struct StatisticsView: View {
     @State private var longestStreakName: String = ""
     @State private var longestStreakStartDate: Date?
     @State private var longestStreak: Int = 0
+    @State private var dailySummary: [String: Int] = [:]
+    @State private var weeklySummary: [String: Int] = [:]
+    @State private var monthlySummary: [String: Int] = [:]
 
 
     var body: some View {
         VStack {
             if longestStreakStartDate != nil {
-                Text("Longest Streak: \(longestStreakName) (\(longestStreak) days)")//, Streak started on \(dateFormatter.string(from: startDate))")
+                Text("Longest Streak: \(longestStreakName) (\(longestStreak) days)")
             } else {
                 Text("No streaks available")
             }
-            SimpleBarChartView(data: habitCountsByDate.map { (key, value) in
-                DailyHabitData(date: dateFormatter.date(from: key) ?? Date(), count: value)
-            }.sorted(by: { $0.date < $1.date }))
+            Spacer()
+            Spacer()
+            
+            Text("Daily Summary")
+            List(dailySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                Text("\(key): \(value) habits")
+            }
+            
+            Spacer()
+            Text("Weekly Summary")
+            List(weeklySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                Text("Week \(key): \(value) habits")
+            }
+            
+            
+            Text("Monthly Summary")
+            List(monthlySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                Text("\(key): \(value) habits")
+            }
         }
         .onAppear {
+            print("Statistics from UserDefaults: \(UserDefaults.standard.dictionary(forKey: "habitStatistics") ?? [:])")
             calculateStatistics()
         }
+
     }
     
     
 
+
+
     private func calculateStatistics() {
-        var countsByDate: [String: Int] = [:]
-        var longestStreak = 0
+        var dailyCounts: [String: Int] = [:]
+        var weeklyCounts: [String: Int] = [:]
+        var monthlyCounts: [String: Int] = [:]
+        var longestStreakTemp = 0
         var currentLongestStreakName = ""
         var currentLongestStreakStartDate: Date?
 
@@ -44,22 +69,40 @@ struct StatisticsView: View {
             if let date = details["date"] as? Date,
                let streak = details["streak"] as? Int,
                let name = details["name"] as? String {
-                let dateString = dateFormatter.string(from: date)
-                countsByDate[dateString, default: 0] += 1
-                    
-                if streak > longestStreak {
-                    longestStreak = streak
+                let day = dateFormatter.string(from: date)
+                let week = Calendar.current.component(.weekOfYear, from: date)
+                let month = monthFormatter.string(from: date)
+
+                dailyCounts[day, default: 0] += 1
+                weeklyCounts["\(week)", default: 0] += 1
+                monthlyCounts[month, default: 0] += 1
+
+                if streak > longestStreakTemp {
+                    longestStreakTemp = streak
                     currentLongestStreakName = name
                     currentLongestStreakStartDate = date
                 }
             }
         }
 
-        habitCountsByDate = countsByDate
+        dailySummary = dailyCounts
+        weeklySummary = weeklyCounts
+        monthlySummary = monthlyCounts
+        longestStreak = longestStreakTemp  // Säkerställ att detta uppdateras korrekt
         longestStreakName = currentLongestStreakName
         longestStreakStartDate = currentLongestStreakStartDate
-        self.longestStreak = longestStreak
     }
+
+
+
+
+    let monthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy MMM"
+        formatter.timeZone = TimeZone(identifier: "Europe/Stockholm")
+        return formatter
+    }()
+
 
 }
 
