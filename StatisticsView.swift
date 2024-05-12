@@ -23,28 +23,33 @@ struct StatisticsView: View {
         VStack {
             if longestStreakStartDate != nil {
                 Text("Longest Streak: \(longestStreakName) (\(longestStreak) days)")
-            } else {
-                Text("No streaks available")
-            }
-            Spacer()
-            Spacer()
+                                        .font(.headline)
+                                        .padding(.bottom, 5)
+                                } else {
+                                    Text("No streaks available")
+                                        .padding(.bottom, 5)
+                                }
             
             Text("Daily Summary")
-            List(dailySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-                Text("\(key): \(value) habits")
-            }
-            
-            Spacer()
-            Text("Weekly Summary")
-            List(weeklySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-                Text("Week \(key): \(value) habits")
-            }
-            
-            
-            Text("Monthly Summary")
-            List(monthlySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
-                Text("\(key): \(value) habits")
-            }
+                                .font(.title2)
+                                .padding(.vertical, 5)
+                            ForEach(dailySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                                Text("\(key): \(value) habits")
+                            }
+
+                            Text("Weekly Summary")
+                                .font(.title2)
+                                .padding(.vertical, 5)
+                            ForEach(weeklySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                                Text("Week \(key): \(value) habits")
+                            }
+
+                            Text("Monthly Summary")
+                                .font(.title2)
+                                .padding(.vertical, 5)
+                            ForEach(monthlySummary.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                                Text("\(key): \(value) habits")
+                            }
         }
         .onAppear {
             print("Statistics from UserDefaults: \(UserDefaults.standard.dictionary(forKey: "habitStatistics") ?? [:])")
