@@ -4,10 +4,10 @@
 //
 //  Created by Karl Nyhlin on 2024-04-30.
 //
-// TODO: Önskvärda förbättringar:
+// TODO:
 // 1. Design!!!
-// 2. Ta ev bort möjligheten att avmarkera "done", logiken för streaks är inte helt vattentät om man markerar och avmarkerar flera gånger.
-// 3. Fixa statistiksidan så att den visar mer utförlig info.
+// 2. Fixa statistiksidan så att den visar mer utförlig info.
+// 3. Fixa fel i datan som statistiksidan visar
 
 
 import SwiftUI

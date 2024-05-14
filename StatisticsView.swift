@@ -93,7 +93,7 @@ struct StatisticsView: View {
         dailySummary = dailyCounts
         weeklySummary = weeklyCounts
         monthlySummary = monthlyCounts
-        longestStreak = longestStreakTemp  // Säkerställ att detta uppdateras korrekt
+        longestStreak = longestStreakTemp  // Dubbelkolla att detta uppdateras korrekt
         longestStreakName = currentLongestStreakName
         longestStreakStartDate = currentLongestStreakStartDate
     }

@@ -88,7 +88,9 @@ struct HabitListView: View {
     
     private func markDone(_ item: Item) {
         withAnimation {
-            item.done.toggle()  // Toggles the 'done' state
+            if item.done == false {
+                item.done.toggle()  // Makes item.done = true (not possible to unmark)
+            }
             if item.done {
                 item.penultimateDoneDate = item.latestDoneDate
                 item.latestDoneDate = Date()  // Updates the latestDoneDate to today

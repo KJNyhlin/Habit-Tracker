@@ -17,7 +17,7 @@ struct ItemDetailView: View {
     var body: some View {
         VStack {
             Text("Details for \(item.name ?? "Ingen titel")")
-            // ... övrig kod ...
+            // ... more details ...
 
             Toggle("Enable Daily Reminder", isOn: $reminderEnabled)
                 .onChange(of: reminderEnabled) { isEnabled in
